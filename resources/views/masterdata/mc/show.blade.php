@@ -1,0 +1,31 @@
+@extends('layout.app')
+@section('content')
+<div class="container">
+    <div class="card">
+        <div class="card-header">{{ $title }}</div>
+            <div class="card-body">
+                @if ($mc->gambar)
+                <img src="{{ asset('storage/'.$mc->gambar) }}" class="card-img-top" height="500" alt="...">
+                @else
+                <img src="{{('assets/img/placeholder.png')}}" class="card-img-top" width="200" height="200" alt="...">
+                @endif
+                <div class="text-center mt-3">
+                    <h2>{{$mc->name}}</h2>
+                    <h3>Rp. {{number_format($mc->harga)}}</h3>
+                    <p>Status : {{$mc->ketersediaan}}</p>
+                    <p>{{ $mc->deskripsi}}</p>
+                </div>
+                @if(auth()->user()->role_id ==2)
+                <div class="text-center">
+                    <div class="mt-5 text-center">
+                        <a href="{{url('mc')}}" class="btn btn-secondary">Batal</a>
+                        <a href="{{url('cart/'.$mc->id)}}" class="btn btn-info text-white">Pesan sekarang</a>
+                    </div>
+                </div>
+            @endif
+            </div>
+  </div>
+</div>
+
+
+@endsection
